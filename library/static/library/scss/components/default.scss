@@ -1,0 +1,60 @@
+body {
+    position: relative;
+    font: 16px Arial, Helvetica, sans-serif;
+    color: $color-text;
+    background-color: $color-bg;
+}
+
+img {
+	max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 1.2em 0 0.5em;
+    line-height: 1.2;
+}
+
+p {
+    line-height: $line-height;
+}
+
+li {
+    line-height: $line-height;
+}
+
+a {
+	color: $color-secont;
+}
+
+.clr {
+    clear: both;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    box-sizing: border-box;
+    padding: 0 $content-indent;
+    width: $screen-lg;
+    margin: 50px auto;
+    flex: 1;
+    
+    & > :first-child {
+        margin-top: 0;
+    }
+    @media #{$media-lg} {
+        width: 100%;
+        margin: 0;
+    }
+    @media #{$media-sm} {
+        margin: 15px 0 15px;
+        width: auto;
+    }
+}

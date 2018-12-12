@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% import "snippets/book_view.html" as book_makro %}
+
+{% block content_body %}
+	{% if search_list|length > 0 %}
+		<h2>Результати:</h2>
+		{{ book_makro.book_view(search_list) }}
+	{% else %}
+		{% include "snippets/search.html" %}
+		
+		{% if keyword_error %}
+			<p>Вібачте але минимальна довжіна слова для пошуку складае <q>{{ keyword_error }}</q> символи.</p>
+		{% else %}
+			<p>Выбачте, але по вашому запиту нічого не знайдено.</p>
+			<h3>Рекомендації:</h3>
+			<ul>
+				<li>Переконайтеся, що в словах немає помилок;</li>
+				<li>Спробуйте використовувати інші ключові слова;</li>
+				<li>Спробуйте використовувати більш прості ключові слова.</li>
+			</ul>
+		{% endif %}
+	{% endif %}
+{% endblock %}

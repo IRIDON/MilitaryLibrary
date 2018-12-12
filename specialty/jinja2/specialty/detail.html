@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content_body %}
+	<h2>{{ specialty.name }}</h2>
+	
+	{% for book in book_list %}
+		<h3><a href="{{ url('book:detail', kwargs={'pk': book.id}) }}">{{ book.name }}</a></h3>
+		<p>{{ book.description }}</p>
+	{% endfor %}
+{% endblock %}
