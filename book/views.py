@@ -13,9 +13,11 @@ from hitcount.views import HitCountDetailView
 from .models import Book
 
 
-class IndexView(ListView):
+class Index(ListView):
+    model = Book
     template_name = 'book/index.html'
     context_object_name = 'latest_book_list'
+    paginate_by = settings.PAGE_LIST_AMOUNT_BOOK
 
     def get_queryset(self):
         return Book.objects.filter(visible=True).all()
@@ -44,9 +46,9 @@ class Search(TemplateView):
         return super(TemplateView, self).render_to_response(context)
 
 
-class DetailView(HitCountDetailView):
+class Detail(HitCountDetailView):
     model = Book
-    count_hit=True
+    count_hit = True
     template_name = 'book/detail.html'
 
     def get_file_link(self, book):

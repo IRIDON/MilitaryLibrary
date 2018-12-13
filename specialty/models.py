@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.utils.translation import gettext as _
 from django.db import models
+
+from tinymce.models import HTMLField
 
 # Create your models here.
 class Specialty(models.Model):
@@ -9,30 +12,30 @@ class Specialty(models.Model):
         blank=False, 
         null=True, 
         max_length=100,
-        verbose_name=u'Назва:'
+        verbose_name=_('Назва:')
     )
     slug = models.SlugField(
-        verbose_name='Slug',
         max_length=25,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name='Slug',
     )
     pub_date = models.DateTimeField(
         blank=False,
         auto_now=True,
         null=True,
-        verbose_name=u'Дата публікації:'
+        verbose_name=_('Дата публікації:')
     )
-    description = models.TextField(
+    description = HTMLField(
     	blank=True, 
     	null=True,
-    	verbose_name=u'Опис:'
+    	verbose_name=_('Опис:')
 	)
 
     class Meta:
-        verbose_name = u'Спеціальність'
-        verbose_name_plural = u'Спеціальності'
+        verbose_name = _('Спеціальність')
+        verbose_name_plural = _('Спеціальності')
 
     def __unicode__(self):
         return "%s" % self.name

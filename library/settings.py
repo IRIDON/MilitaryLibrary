@@ -22,6 +22,7 @@ APPS = [
 ]
 
 INSTALLED_APPS = [
+    'tinymce',
     'hitcount',
     'easy_thumbnails',
     'filer',
@@ -46,6 +47,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'library.urls'
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+}
+
+DATABASES['postgresql'] = POSTGRES_DATABASES
+
 
 JINJA2_DIRS = [os.path.join(BASE_DIR, app, 'jinja2', app) for app in APPS]
 
@@ -74,22 +86,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'library.wsgi.application'
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    'postgresql': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'library_db',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -167,4 +163,28 @@ MENU_ITEMS = [
 
 SEARCH_MIN_LENGHT = 3
 
+
+PAGE_LIST_AMOUNT_BOOK = 9
+PAGE_LIST_AMOUNT_CAT = 12
+
+
+# Wysiwyg settings
+TINYMCE_FILEBROWSER = False
+TINYMCE_INCLUDE_JQUERY = False
+TINYMCE_COMPRESSOR = True
+TINYMCE_DEFAULT_CONFIG = {
+    'mode': 'exact',
+    'theme': 'advanced',
+    'relative_urls': False,
+    'width': 800,
+    'height': 400,
+    'plugins': 'table,advlink,inlinepopups,preview,searchreplace,contextmenu,paste,noneditable,visualchars,nonbreaking,xhtmlxtras',
+    'theme_advanced_buttons1': 'bold,italic,underline,strikethrough,|,sub,sup,|,bullist,numlist,formatselect,|,pastetext,pasteword,|,search,replace,|,undo,redo,|,link,unlink',
+    'theme_advanced_buttons2': 'visualaid,tablecontrols,|,blockquote,del,ins,|,preview,code',
+    'theme_advanced_toolbar_location': 'top',
+    'theme_advanced_toolbar_align': 'left',
+    'content_css': '/media/css/tinymce.css',
+    'extended_valid_elements': 'noindex',
+    'custom_elements': 'noindex',
+}
 

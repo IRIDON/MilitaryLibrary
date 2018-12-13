@@ -1,9 +1,9 @@
-from django.views import generic
+from django.views.generic import TemplateView
 from book.models import Book, Category, Author
 
 ITEMS_AMOUNT = 3
 
-class IndexView(generic.TemplateView):
+class IndexView(TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):

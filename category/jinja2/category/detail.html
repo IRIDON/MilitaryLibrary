@@ -3,7 +3,7 @@
 {% block content_body %}
 	<h2>{{ category.name }}</h2>
 	
-	{% for book in book_list %}
+	{% for book in object_list %}
 		<h3><a href="{{ url('book:detail', kwargs={'pk': book.id}) }}">{{ book.name }}</a></h3>
 		<p>{{ book.description }}</p>
 	{% endfor %}

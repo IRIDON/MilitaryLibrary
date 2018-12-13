@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.utils.translation import gettext as _
 from django.contrib import admin
 from django.utils.html import format_html
 from django.core.urlresolvers import reverse
@@ -10,7 +11,13 @@ from .models import Book, Author, Language
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['name', 'visible', 'page', 'pub_date']
+    list_display = ['name', 'visible', 'page', 'view_category', 'view_specialty', 'pub_date']
+    list_filter = ['pub_date', 'visible', 'category', 'specialty']
+    fieldsets = [
+        (None, {'fields': ['visible', 'name', 'description', 'pub_date']}),
+        ('Фаїли', {'fields': [('image', 'file'), 'file_url']}),
+        ('Категорії', {'fields': [('category', 'specialty'), ('language', 'author')]}),
+    ]
 
     def page(self, book):
 		url = reverse('book:detail', kwargs={'pk': book.id})
@@ -20,6 +27,24 @@ class BookAdmin(admin.ModelAdmin):
 			url,
 			url
 		)
+    page.short_description = _('Перегляд')
+
+    def view_category(self, book):
+        return self.get_many_to_manu(book.category)
+    view_category.short_description = _('Категорія')
+
+    def view_specialty(self, book):
+        return self.get_many_to_manu(book.specialty)
+    view_specialty.short_description = _('Спеціальність')
+
+    def get_many_to_manu(self, object):
+        result = []
+
+        for val in object.values():
+            result.append(val['name'])
+
+        return result
+
 
 
 class LanguageAdmin(admin.ModelAdmin):

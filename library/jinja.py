@@ -18,5 +18,4 @@ def environment(**options):
         'get_thumb': get_thumb,
     })
 
-
     return env
