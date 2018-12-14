@@ -1,0 +1,51 @@
+<section class="list">
+{% for book in book_list %}
+    <div class="list__i">
+        {% if book.id %}
+        <a href="{% url 'book:detail' book.id %}">
+            <h3 class="list__t">{{ book.name }}</h3>
+
+            {% if book.image %}
+            {% load thumbnail %}
+            <img src="{{ book.image|thumbnail_url:'book_cover' }}" alt="" />
+            {% endif %}
+        </a>
+        {% endif %}
+
+        {% if book.author.all %}
+        <div class="list__author">
+        Автор:
+        {% for author in book.author.all %}
+            <span>{{ author }}</span>{% if not loop.last %},{% endif %}
+        {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if book.category.all %}
+        <div class="list__cat">
+        Категорія:
+        {% for category in book.category.all %}
+            <a href="{% url 'category:detail' category.slug %}">
+                {{ category }}</a>{% if not loop.last %},{% endif %}
+        {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if book.specialty.all %}
+        <div class="list__cat">
+        Cпеціальність:
+        {% for specialty in book.specialty.all %}
+            <a href="{% url 'category:detail' specialty.slug %}">
+                {{ specialty }}</a>{% if not loop.last %},{% endif %}
+        {% endfor %}
+        </div>
+        {% endif %}
+
+        <p class="list__tx">{{ book.description|truncatechars:200 }}</p>
+    </div>
+
+    {% if forloop.counter|divisibleby:3 %}
+    <div class="clr"></div>
+    {% endif %}
+{% endfor %}
+</section>

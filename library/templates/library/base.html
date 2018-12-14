@@ -7,7 +7,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="{{ static('library/css/main.css.gz') }}">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'library/css/main.css.gz' %}">
 
     {% block head %}{% endblock %}
 </head>
@@ -15,7 +16,7 @@
     <div class="layout">
         <header class="head">
             <h1 class="head__t">
-                <a href="{{ url('index') }}">{{ settings.SITE_NAME }}</a>
+                <a href="{% url 'index' %}">{{ settings.SITE_NAME }}</a>
             </h1>
 
             <label class="head__toogle" for="toogle-menu">
@@ -26,9 +27,9 @@
             <input class="head__toogle-input" type="checkbox" id="toogle-menu">
 
             <div class="head__menu">
-                {% include "snippets/menu.html" %}
+                {% include "library/snippets/menu.html" %}
 
-                {% include "snippets/search.html" %}
+                {% include "library/snippets/search.html" %}
             </div>
         </header>
         <main class="content">
@@ -36,7 +37,7 @@
 
 
             {% if is_paginated %}
-                {% include "snippets/pagination.html" %}
+                {% include "library/snippets/pagination.html" %}
             {% endif %}
         </main>
         <footer class="footer">

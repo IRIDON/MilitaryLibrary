@@ -1,20 +1,22 @@
 'use strict';
  
-const gulp = require('gulp');
-const sass = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
-const csso = require('gulp-csso');
-const debug = require('gulp-debug');
-const rename = require("gulp-rename");
-const gzip = require('gulp-gzip');
-const gulpif = require('gulp-if');
+const gulp = require('gulp'),
+    sass = require('gulp-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
+    csso = require('gulp-csso'),
+    debug = require('gulp-debug'),
+    rename = require("gulp-rename"),
+    gzip = require('gulp-gzip'),
+    gulpif = require('gulp-if');
 
-const mainStylePath = '**/static/**/scss/';
+const path = require('path'),
+    root = path.resolve(__dirname),
+    mainStylePath = '**/static/**/scss/';
 
 global.DEV = false;
  
 gulp.task('style', function () {
-    return gulp.src(mainStylePath + 'main.scss')
+    return gulp.src(root + '/' + mainStylePath + 'main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: ['last 2 version', 'IE 10'],

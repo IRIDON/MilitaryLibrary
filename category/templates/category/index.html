@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'library/base.html' %}
 
 {% block content_body %}
 	<h2>Категорії</h2>
 
 	{% for category in latest_category_list %}
-		<h3><a href="{{ url('category:detail', kwargs={'slug': category.slug}) }}">{{ category.name }}</a></h3>
+		<h3><a href="{% url 'category:detail' category.slug %}">{{ category.name }}</a></h3>
 		<p>{{ category.description }}</p>
 	{% endfor %}
 

@@ -1,13 +1,11 @@
-{% extends 'base.html' %}
-
-{% import "snippets/book_view.html" as book_makro %}
+{% extends 'library/base.html' %}
 
 {% block content_body %}
 	{% if search_list|length > 0 %}
 		<h2>Результати:</h2>
-		{{ book_makro.book_view(search_list) }}
+		{% include "library/snippets/book_view.html" with book_list=search_list %}
 	{% else %}
-		{% include "snippets/search.html" %}
+		{% include "library/snippets/search.html" %}
 		
 		{% if keyword_error %}
 			<p>Вібачте але минимальна довжіна слова для пошуку складае <q>{{ keyword_error }}</q> символи.</p>

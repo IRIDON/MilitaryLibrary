@@ -10,6 +10,7 @@ from simple_search import search_filter
 from django.views.generic import ListView, DetailView, TemplateView
 from django.conf import settings
 from hitcount.views import HitCountDetailView
+from library.logic import filter_items
 from .models import Book
 
 
@@ -20,7 +21,7 @@ class Index(ListView):
     paginate_by = settings.PAGE_LIST_AMOUNT_BOOK
 
     def get_queryset(self):
-        return Book.objects.filter(visible=True).all()
+        return filter_items(Book).all()
 
 
 class Search(TemplateView):
@@ -32,7 +33,7 @@ class Search(TemplateView):
         search_fields = ['name', 'description']
 
         if len(keyword) >= settings.SEARCH_MIN_LENGHT:
-            search = Book.objects.filter(visible=True).filter(search_filter(search_fields, keyword))
+            search = filter_items(Book).filter(search_filter(search_fields, keyword))
 
             context = {
                 'search_list': search,

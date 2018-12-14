@@ -1,0 +1,13 @@
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a class="pagination__link" href="?page={{ page_obj.previous_page_number }}">попередня</a>
+    {% endif %}
+
+    <span class="pagination__current">
+        Сторінки {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a class="pagination__link" href="?page={{ page_obj.next_page_number }}">наступна</a>
+    {% endif %}
+</div>

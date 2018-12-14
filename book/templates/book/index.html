@@ -1,0 +1,5 @@
+{% extends 'library/base.html' %}
+
+{% block content_body %}
+    {% include "library/snippets/book_view.html" with book_list=latest_book_list %}
+{% endblock %}

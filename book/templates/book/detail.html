@@ -1,37 +1,38 @@
-{% extends 'base.html' %}
+{% extends 'library/base.html' %}
 
 {% block content_body %}
 	<h2 class="__t">{{ book.name }}</h2>
 
     {% if book.image %}
-    <img class="__img" src="{{ get_thumb(book.image, 'book_cover') }}" alt="">
+        {% load thumbnail %}
+        <img src="{{ book.image|thumbnail_url:'book_cover' }}" alt="" />
     {% endif %}
 
     <div class="__view">Переглядів: {{ book.hit_count.hits }}</div>
 
-    {% if book.author.all() %}
+    {% if book.author.all %}
     <div class="__author">
         Автор: 
-        {% for author in book.author.all() %}
+        {% for author in book.author.all %}
             <span>{{ author }}</span>{% if not loop.last %},{% endif %}
         {% endfor %}
     </div>
     {% endif %}
 
-    {% if book.category.all() %}
+    {% if book.category.all %}
     <div class="__cat">
         Категорія: 
-        {% for category in book.category.all() %}
-            <a href="{{ url('category:detail', kwargs={'slug': category.slug}) }}">{{ category }}</a>{% if not loop.last %},{% endif %}
+        {% for category in book.category.all %}
+            <a href="{% url 'category:detail' category.slug %}">{{ category }}</a>{% if not loop.last %},{% endif %}
         {% endfor %}
     </div>
     {% endif %}
 
-    {% if book.specialty.all() %}
+    {% if book.specialty.all %}
     <div class="__cat">
         Cпеціальність:
-        {% for specialty in book.specialty.all() %}
-            <a href="{{ url('specialty:detail', kwargs={'slug': specialty.slug}) }}">{{ specialty }}</a>{% if not loop.last %},{% endif %}
+        {% for specialty in book.specialty.all %}
+            <a href="{% url 'specialty:detail' specialty.slug %}">{{ specialty }}</a>{% if not loop.last %},{% endif %}
         {% endfor %}
     </div>
     {% endif %}

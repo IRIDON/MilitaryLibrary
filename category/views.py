@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.views.generic import ListView, DetailView
 from django.views.generic.list import MultipleObjectMixin
+
+from library.logic import filter_items
 from .models import Category
 from book.models import Book
 
@@ -15,7 +17,7 @@ class Index(ListView):
     paginate_by = settings.PAGE_LIST_AMOUNT_CAT
 
     def get_queryset(self):
-        return Category.objects.order_by('-pub_date')
+        return Category.objects.order_by('pub_date')
 
 
 class Detail(DetailView, MultipleObjectMixin):
@@ -25,7 +27,7 @@ class Detail(DetailView, MultipleObjectMixin):
 
     def get_context_data(self, **kwargs):
         category = kwargs['object']
-        self.object_list = Book.objects.order_by('-pub_date').filter(category__slug=category.slug)
+        self.object_list = filter_items(Book).filter(category__slug=category.slug)
 
         context = super(Detail, self).get_context_data(**kwargs)
 

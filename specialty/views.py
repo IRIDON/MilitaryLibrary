@@ -8,6 +8,7 @@ from django.views.generic.list import MultipleObjectMixin
 
 # Create your views here.
 from django.views import generic
+from library.logic import filter_items
 from .models import Specialty
 from book.models import Book
 
@@ -19,7 +20,7 @@ class Index(ListView):
     paginate_by = settings.PAGE_LIST_AMOUNT_CAT
 
     def get_queryset(self):
-        return Specialty.objects.order_by('-pub_date')
+        return Specialty.objects.order_by('pub_date')
 
 
 class Detail(DetailView, MultipleObjectMixin):
@@ -29,7 +30,7 @@ class Detail(DetailView, MultipleObjectMixin):
 
     def get_context_data(self, **kwargs):
         specialty = kwargs['object']
-        self.object_list = Book.objects.order_by('-pub_date').filter(specialty__slug=specialty.slug)
+        self.object_list = filter_items(Book).filter(specialty__slug=specialty.slug)
 
         context = super(Detail, self).get_context_data(**kwargs)
 

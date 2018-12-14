@@ -1,0 +1,9 @@
+{% extends 'library/base.html' %}
+
+{% block content_body %}
+	<h2>Популярні:</h2>
+    {% include "library/snippets/book_view.html" with book_list=most_views_books %}
+
+	<h2>Oстанні:</h2>
+    {% include "library/snippets/book_view.html" with book_list=new_books %}
+{% endblock %}
