@@ -12,25 +12,25 @@ class Category(models.Model):
         blank=False, 
         null=True, 
         max_length=100,
-        verbose_name=_('Назва:')
+        verbose_name=_('Назва')
     )
     slug = models.SlugField(
         max_length=25,
         null=False,
         blank=False,
         unique=True,
-        verbose_name=_('Slug:')
+        verbose_name=_('Slug')
     )
     pub_date = models.DateTimeField(
         blank=False,
         auto_now=True,
         null=True,
-        verbose_name=_('Дата публікації:')
+        verbose_name=_('Дата публікації')
     )
     description = HTMLField(
         blank=True, 
         null=True,
-        verbose_name=_('Опис:')
+        verbose_name=_('Опис')
     )
 
     class Meta:

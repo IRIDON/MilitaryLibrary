@@ -5,6 +5,7 @@
 	
 	{% for book in object_list %}
 		<h3><a href="{% url 'book:detail' book.id %}">{{ book.name }}</a></h3>
-		<p>{{ book.description }}</p>
+		<p>{{ book.description|striptags|truncatechars:300|safe }}</p>
 	{% endfor %}
+
 {% endblock %}

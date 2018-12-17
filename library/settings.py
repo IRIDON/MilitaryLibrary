@@ -46,16 +46,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'library.urls'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-}
-
-DATABASES['postgresql'] = POSTGRES_DATABASES
-
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -146,6 +136,9 @@ TINYMCE_DEFAULT_CONFIG = {
 
 #Site main settings
 SITE_NAME = u'Військова бібліотека'
+
+
+ALLOWED_BOOK_FORMATS = ('pdf', 'txt', 'doc', 'djvu', 'fb2', 'epub', 'mobi', 'rtf', 'lrf')
 
 
 MENU_ITEMS = [

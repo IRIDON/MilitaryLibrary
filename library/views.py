@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView, DetailView
 from django.views.generic.edit import FormView
 from django.conf import settings
-from book.models import Book, Category, Author
+from book.models import Book, Category
 from library.logic import filter_items
 from .forms import ContactForm
 

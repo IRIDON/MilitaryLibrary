@@ -11,39 +11,7 @@ from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
 
 from hitcount.models import HitCount, HitCountMixin
-
 from tinymce.models import HTMLField
-
-# Create your models here.
-class Author(models.Model):
-    first_name = models.CharField(
-        unique=False,
-        blank=False,
-        null=True, 
-        max_length=50,
-        verbose_name=_("Ім'я:")
-    )
-    last_name = models.CharField(
-        unique=False,
-        blank=False,
-        null=True, 
-        max_length=50,
-        verbose_name=_('Прізвище:')
-    )
-    patronymic = models.CharField(
-        unique=False,
-        blank=True,
-        null=True, 
-        max_length=50,
-        verbose_name=_('По батькові:')
-    )
-
-    class Meta:
-        verbose_name = _('Автора')
-        verbose_name_plural = _('Автори')
-
-    def __unicode__(self):
-        return "%s %s" % (self.first_name, self.last_name)
 
 
 class Language(models.Model):
@@ -51,7 +19,7 @@ class Language(models.Model):
         unique=False,
         blank=False,
         max_length=100,
-        verbose_name=_('Назва:')
+        verbose_name=_('Назва')
     )
     iso = models.CharField(
         unique=True,
@@ -71,57 +39,58 @@ class Language(models.Model):
 class Book(models.Model, HitCountMixin):
     visible = models.BooleanField(
         default=True,
-        verbose_name=_('Показувати:')
+        verbose_name=_('Показувати')
     )
     name = models.CharField(
         blank=False, 
         null=True, 
         max_length=100,
-        verbose_name=_('Назва:')
+        verbose_name=_('Назва')
     )
     pub_date = models.DateTimeField(
         blank=False,
         null=True,
-        verbose_name=_('Дата публікації:')
+        verbose_name=_('Дата публікації')
     )
     description = HTMLField(
-        verbose_name=_('Опис:')
+        verbose_name=_('Опис')
     )
     file_url = models.URLField(
         blank=True, 
         null=True, 
-        verbose_name=_('Посилання на файл:')
+        verbose_name=_('Посилання на файл')
     )
     file = FilerFileField(
         blank=True, 
         null=True, 
         related_name='download_file',
-        verbose_name=_('Завантажити файл:')
+        verbose_name=_('Завантажити файл')
     )
     image = FilerImageField(
         blank=True, 
         null=True, 
         related_name="book_image"
     )
-    author = models.ManyToManyField(
-        Author,
+    author = models.CharField(
         blank=True,
-        verbose_name=_('Автор:')
+        null=True,
+        max_length=100,
+        verbose_name=_('Автор')
     )
     language = models.ManyToManyField(
         Language,
         blank=True,
-        verbose_name=_('Мова:')
+        verbose_name=_('Мова')
     )
     category = models.ManyToManyField(
         Category,
         blank=True,
-        verbose_name=_('Категорія:')
+        verbose_name=_('Категорія')
     )
     specialty = models.ManyToManyField(
         Specialty,
         blank=True,
-        verbose_name=_('Спеціальність:')
+        verbose_name=_('Спеціальність')
     )
     hit_count_generic = GenericRelation(
         HitCount, 

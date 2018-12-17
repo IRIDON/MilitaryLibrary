@@ -10,12 +10,9 @@
 
     <div class="__view">Переглядів: {{ book.hit_count.hits }}</div>
 
-    {% if book.author.all %}
+    {% if book.author %}
     <div class="__author">
-        Автор: 
-        {% for author in book.author.all %}
-            <span>{{ author }}</span>{% if not loop.last %},{% endif %}
-        {% endfor %}
+        Автор: {{ book.author }}
     </div>
     {% endif %}
 
@@ -43,5 +40,5 @@
     </p>
     {% endif %}
 
-    <p class="__tx">{{ book.description }}</p>
+    <p class="__tx">{{ book.description|safe }}</p>
 {% endblock %}

@@ -1,9 +1,0 @@
-{% extends 'library/base.html' %}
-
-{% block content_body %}
-	<h2>Cпеціальності:</h2>
-	{% for specialty in latest_specialty_list %}
-		<h3><a href="{% url 'specialty:detail' specialty.slug %}">{{ specialty.name }}</a></h2>
-		<p>{{ specialty.description }}</p>
-	{% endfor %}
-{% endblock %}

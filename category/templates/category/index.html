@@ -1,11 +1,11 @@
 {% extends 'library/base.html' %}
 
 {% block content_body %}
-	<h2>Категорії</h2>
+	<h2>{{ section_title }}</h2>
 
 	{% for category in latest_category_list %}
-		<h3><a href="{% url 'category:detail' category.slug %}">{{ category.name }}</a></h3>
-		<p>{{ category.description }}</p>
+        <h3><a href="{% url url_part category.slug %}">{{ category.name }}</a></h3>
+		<p>{{ category.description|safe }}</p>
 	{% endfor %}
 
 {% endblock %}

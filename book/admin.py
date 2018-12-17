@@ -7,16 +7,16 @@ from django.utils.html import format_html
 from django.core.urlresolvers import reverse
 
 # Register your models here.
-from .models import Book, Author, Language
+from .models import Book, Language
 
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ['name', 'visible', 'page', 'view_category', 'view_specialty', 'pub_date']
     list_filter = ['pub_date', 'visible', 'category', 'specialty']
     fieldsets = [
-        (None, {'fields': ['visible', 'name', 'description', 'pub_date']}),
+        (None, {'fields': ['visible', 'name', 'description', 'pub_date', 'author']}),
         ('Фаїли', {'fields': [('image', 'file'), 'file_url']}),
-        ('Категорії', {'fields': [('category', 'specialty'), ('language', 'author')]}),
+        ('Категорії', {'fields': [('category', 'specialty'), ('language')]}),
     ]
 
     def page(self, book):
@@ -52,5 +52,4 @@ class LanguageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Book, BookAdmin)
-admin.site.register(Author)
 admin.site.register(Language, LanguageAdmin)

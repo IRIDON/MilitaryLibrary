@@ -30,7 +30,7 @@ class Search(TemplateView):
     def get(self, request, **kwargs):
         data = request.GET.dict()
         keyword = data['search'].lower()
-        search_fields = ['name', 'description']
+        search_fields = ['name', 'description', 'author']
 
         if len(keyword) >= settings.SEARCH_MIN_LENGHT:
             search = filter_items(Book).filter(search_filter(search_fields, keyword))
@@ -61,12 +61,11 @@ class Detail(HitCountDetailView):
         return book.file_url
 
     def get_file_type(self, link):
-        available_files = ('pdf', 'txt', 'doc', 'djvu', 'fb2', 'epub', 'mobi', 'rtf', 'lrf')
         ext = re.search('\.[a-zA-Z0-9]+$', str(link))
         ext = ext.group(0).replace('.', '')
         ext = ext.encode('utf-8')
 
-        if available_files.index(ext) != -1:
+        if settings.ALLOWED_BOOK_FORMATS.index(ext) != -1:
             return ext
 
         return None
