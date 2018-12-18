@@ -3,9 +3,6 @@ from __future__ import unicode_literals
 import re
 import unicodedata
 
-from django.shortcuts import render
-from simple_search import search_filter
-
 # Create your views here.
 from django.views.generic import ListView, DetailView, TemplateView
 from django.conf import settings
@@ -22,29 +19,6 @@ class Index(ListView):
 
     def get_queryset(self):
         return filter_items(Book).all()
-
-
-class Search(TemplateView):
-    template_name = 'book/search.html'
-
-    def get(self, request, **kwargs):
-        data = request.GET.dict()
-        keyword = data['search'].lower()
-        search_fields = ['name', 'description', 'author']
-
-        if len(keyword) >= settings.SEARCH_MIN_LENGHT:
-            search = filter_items(Book).filter(search_filter(search_fields, keyword))
-
-            context = {
-                'search_list': search,
-            }
-        else:
-            context = {
-                'search_list': [],
-                'keyword_error': settings.SEARCH_MIN_LENGHT,
-            }
-
-        return super(TemplateView, self).render_to_response(context)
 
 
 class Detail(HitCountDetailView):
@@ -71,7 +45,7 @@ class Detail(HitCountDetailView):
         return None
 
     def get_context_data(self, **kwargs):
-        context = super(DetailView, self).get_context_data(**kwargs)
+        context = super(Detail, self).get_context_data(**kwargs)
         file_link = self.get_file_link(context['book'])
 
         if file_link:

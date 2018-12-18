@@ -1,13 +1,14 @@
 {% extends 'library/base.html' %}
 
 {% block content_body %}
-    <form action="{% url 'contact-us' %}" method="post">
-        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <form class="form" action="{% url 'contact-us' %}" method="post">
+        {% csrf_token %}
 
         {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }}: {{ field }}
+        <div class="form__i">
+            <div class="form__er">{{ field.errors }}</div>
+            <div class="form__lb">{{ field.label_tag }}</div>
+            <div class="form__fl">{{ field }}</div>
         </div>
         {% endfor %}
 

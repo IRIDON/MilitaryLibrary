@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+from django.contrib.staticfiles.storage import staticfiles_storage
 from settings_local import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +15,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 APPS = [
     'library',
     'book',
-    'specialty',
     'category',
 ]
 
@@ -128,7 +128,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_buttons2': 'visualaid,tablecontrols,|,blockquote,del,ins,|,preview,code',
     'theme_advanced_toolbar_location': 'top',
     'theme_advanced_toolbar_align': 'left',
-    'content_css': '/media/css/tinymce.css',
+    'content_css': staticfiles_storage.url('library/css/main.css.gz'),
     'extended_valid_elements': 'noindex',
     'custom_elements': 'noindex',
 }

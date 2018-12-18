@@ -14,13 +14,13 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ['name', 'visible', 'page', 'view_category', 'view_specialty', 'pub_date']
     list_filter = ['pub_date', 'visible', 'category', 'specialty']
     fieldsets = [
-        (None, {'fields': ['visible', 'name', 'description', 'pub_date', 'author']}),
+        (None, {'fields': ['visible', 'name', 'slug', 'description', 'pub_date', 'author']}),
         ('Фаїли', {'fields': [('image', 'file'), 'file_url']}),
         ('Категорії', {'fields': [('category', 'specialty'), ('language')]}),
     ]
 
     def page(self, book):
-		url = reverse('book:detail', kwargs={'pk': book.id})
+		url = reverse('book:detail', kwargs={'slug': book.slug})
 
 		return format_html(
 			'<a href="{}" target="_blank">{}</a>',

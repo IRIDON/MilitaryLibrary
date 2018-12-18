@@ -5,7 +5,7 @@
 
     {% if book.image %}
         {% load thumbnail %}
-        <img src="{{ book.image|thumbnail_url:'book_cover' }}" alt="" />
+        <img src="{{ book.image|thumbnail_url:'book_cover' }}" alt="image">
     {% endif %}
 
     <div class="__view">Переглядів: {{ book.hit_count.hits }}</div>

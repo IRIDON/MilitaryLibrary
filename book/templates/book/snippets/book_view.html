@@ -2,7 +2,7 @@
 {% for book in book_list %}
     <div class="list__i">
         {% if book.id %}
-        <a href="{% url 'book:detail' book.id %}">
+        <a href="{% url 'book:detail' book.slug %}">
             <h3 class="list__t">{{ book.name }}</h3>
 
             {% if book.image %}
@@ -32,7 +32,7 @@
         <div class="list__cat">
         Cпеціальність:
         {% for specialty in book.specialty.all %}
-            <a href="{% url 'category:detail' specialty.slug %}">
+            <a href="{% url 'specialty:detail' specialty.slug %}">
                 {{ specialty }}</a>{% if not loop.last %},{% endif %}
         {% endfor %}
         </div>

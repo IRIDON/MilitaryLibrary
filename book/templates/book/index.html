@@ -1,5 +1,9 @@
 {% extends 'library/base.html' %}
 
 {% block content_body %}
-    {% include "library/snippets/book_view.html" with book_list=latest_book_list %}
+    {% include "book/snippets/book_view.html" with book_list=latest_book_list %}
+
+    {% if latest_book_list|length == 0 %}
+        <p>Вибачте, в розділі немає жодного елемента.</p>
+    {% endif %}
 {% endblock %}

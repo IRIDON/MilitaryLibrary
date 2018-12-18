@@ -11,12 +11,13 @@ const gulp = require('gulp'),
 
 const path = require('path'),
     root = path.resolve(__dirname),
-    mainStylePath = '**/static/**/scss/';
+    mainPath = path.resolve(root , 'library', 'static', 'library'),
+    mainStylePath = path.resolve(mainPath, 'scss');
 
 global.DEV = false;
- 
+
 gulp.task('style', function () {
-    return gulp.src(root + '/' + mainStylePath + 'main.scss')
+    return gulp.src(mainStylePath + '/main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: ['last 2 version', 'IE 10'],
@@ -24,15 +25,13 @@ gulp.task('style', function () {
             remove: false
         }))
         .pipe(csso())
-        .pipe(rename(function (path) {
-            path.dirname = path.dirname.replace('scss', 'css')
-        }))
+        .pipe(debug())
         .pipe(gulpif(!DEV, gzip()))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest(mainPath + '/css/'));
 });
  
 gulp.task('watch', function () {
     global.DEV = false;
 
-    gulp.watch(mainStylePath + '**/*.scss', ['style']);
+    gulp.watch(mainStylePath + '/**/*.scss', ['style']);
 });

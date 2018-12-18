@@ -3,7 +3,11 @@
 {% block content_body %}
 	<h2>{{ section_title }}</h2>
 
-	{% for category in latest_category_list %}
+    {% if category_list|length == 0 %}
+        <p>Вибачте, в розділі немає жодного елемента.</p>
+    {% endif %}
+
+	{% for category in category_list %}
         <h3><a href="{% url url_part category.slug %}">{{ category.name }}</a></h3>
 		<p>{{ category.description|safe }}</p>
 	{% endfor %}

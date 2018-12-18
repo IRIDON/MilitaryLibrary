@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 from django.conf import settings
 
 class ContactForm(forms.Form):
-    your_name = forms.CharField(label=_("name"), max_length=100)
+    your_name = forms.CharField(label=_('name'), max_length=100)
     email = forms.EmailField(label=_('email'), max_length=100)
     message = forms.CharField(label=_('message'), widget=forms.Textarea)
 

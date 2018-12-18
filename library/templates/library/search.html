@@ -1,14 +1,14 @@
 {% extends 'library/base.html' %}
 
 {% block content_body %}
-	{% if search_list|length > 0 %}
+	{% if search_list %}
 		<h2>Результати:</h2>
-		{% include "library/snippets/book_view.html" with book_list=search_list %}
+		{% include "book/snippets/book_view.html" with book_list=search_list %}
 	{% else %}
-		{% include "library/snippets/search.html" %}
-		
+		{% include "library/snippets/search.html" with search_value=keyword %}
+
 		{% if keyword_error %}
-			<p>Вібачте але минимальна довжіна слова для пошуку складае <q>{{ keyword_error }}</q> символи.</p>
+			<p>Вібачте але минимальна довжина слова для пошуку складає <q>{{ keyword_error }}</q> символи.</p>
 		{% else %}
 			<p>Выбачте, але по вашому запиту нічого не знайдено.</p>
 			<h3>Рекомендації:</h3>

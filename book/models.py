@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import gettext as _
 from django.contrib.contenttypes.fields import GenericRelation
-from specialty.models import Specialty
-from category.models import Category
+from category.models import Category, Specialty
 
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
@@ -13,13 +12,15 @@ from filer.fields.file import FilerFileField
 from hitcount.models import HitCount, HitCountMixin
 from tinymce.models import HTMLField
 
+from library.logic import _get_unique_slug
+
 
 class Language(models.Model):
     name = models.CharField(
         unique=False,
         blank=False,
         max_length=100,
-        verbose_name=_('Назва')
+        verbose_name=_('Назва:')
     )
     iso = models.CharField(
         unique=True,
@@ -46,6 +47,13 @@ class Book(models.Model, HitCountMixin):
         null=True, 
         max_length=100,
         verbose_name=_('Назва')
+    )
+    slug = models.SlugField(
+        max_length=140,
+        unique=True,
+        null=True,
+        blank=True,
+        verbose_name=_('Slug')
     )
     pub_date = models.DateTimeField(
         blank=False,
@@ -93,10 +101,16 @@ class Book(models.Model, HitCountMixin):
         verbose_name=_('Спеціальність')
     )
     hit_count_generic = GenericRelation(
-        HitCount, 
+        HitCount,
         object_id_field='object_pk',
         related_query_name='hit_count_generic_relation'
     )
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _get_unique_slug(self.name, Book)
+
+        super(Book, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = _('Книгу')
