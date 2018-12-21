@@ -1,21 +1,34 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
+
+{% block head %}
+    <meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
+{% block title %}
+    {% trans "Пошук" noop %} - {{ settings.SITE_NAME }}
+{% endblock %}
 
 {% block content_body %}
 	{% if search_list %}
-		<h2>Результати:</h2>
+		<h2>{% trans "Результати" noop %}:</h2>
 		{% include "book/snippets/book_view.html" with book_list=search_list %}
 	{% else %}
 		{% include "library/snippets/search.html" with search_value=keyword %}
 
 		{% if keyword_error %}
-			<p>Вібачте але минимальна довжина слова для пошуку складає <q>{{ keyword_error }}</q> символи.</p>
+			<p>
+                {% blocktrans with keyword_min_count=keyword_error %}
+                    Вібачте але минимальна довжина слова для пошуку складає <q>{{ keyword_min_count }}</q> символи.
+                {% endblocktrans %}
+            </p>
 		{% else %}
-			<p>Выбачте, але по вашому запиту нічого не знайдено.</p>
-			<h3>Рекомендації:</h3>
+			<p>{% trans "Выбачте, але по вашому запиту нічого не знайдено." noop %}</p>
+			<h3>{% trans "Рекомендації" noop %}:</h3>
 			<ul>
-				<li>Переконайтеся, що в словах немає помилок;</li>
-				<li>Спробуйте використовувати інші ключові слова;</li>
-				<li>Спробуйте використовувати більш прості ключові слова.</li>
+				<li>{% trans "Переконайтеся, що в словах немає помилок;" noop %}</li>
+				<li>{% trans "Спробуйте використовувати інші ключові слова;" noop %}</li>
+				<li>{% trans "Спробуйте використовувати більш прості ключові слова." noop %}</li>
 			</ul>
 		{% endif %}
 	{% endif %}

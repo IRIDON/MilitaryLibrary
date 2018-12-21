@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.utils.translation import gettext as _
+from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.fields import GenericRelation
 from category.models import Category, Specialty
 
@@ -49,7 +50,7 @@ class Book(models.Model, HitCountMixin):
         verbose_name=_('Назва')
     )
     slug = models.SlugField(
-        max_length=140,
+        max_length=settings.SLUG_MAX_LENGTH,
         unique=True,
         null=True,
         blank=True,

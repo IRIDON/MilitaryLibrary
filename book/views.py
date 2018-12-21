@@ -7,7 +7,7 @@ import unicodedata
 from django.views.generic import ListView, DetailView, TemplateView
 from django.conf import settings
 from hitcount.views import HitCountDetailView
-from library.logic import filter_items
+from library.logic import filter_items, _get_file_type
 from .models import Book
 
 
@@ -34,16 +34,6 @@ class Detail(HitCountDetailView):
 
         return book.file_url
 
-    def get_file_type(self, link):
-        ext = re.search('\.[a-zA-Z0-9]+$', str(link))
-        ext = ext.group(0).replace('.', '')
-        ext = ext.encode('utf-8')
-
-        if settings.ALLOWED_BOOK_FORMATS.index(ext) != -1:
-            return ext
-
-        return None
-
     def get_context_data(self, **kwargs):
         context = super(Detail, self).get_context_data(**kwargs)
         file_link = self.get_file_link(context['book'])
@@ -51,7 +41,7 @@ class Detail(HitCountDetailView):
         if file_link:
             context.update({
                 'download_link': file_link,
-                'download_file_type': self.get_file_type(file_link),
+                'download_file_type': _get_file_type(file_link),
             })
 
         return context

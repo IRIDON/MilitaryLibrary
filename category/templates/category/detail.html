@@ -1,10 +1,15 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {{ category.name }} - {{ settings.SITE_NAME }}
+{% endblock %}
 
 {% block content_body %}
 	<h2>{{ category.name }}</h2>
 
     {% if object_list|length == 0 %}
-        <p>Вибачте, в розділі немає жодного елемента.</p>
+        <p>{% trans "Вибачте, в розділі немає жодного елемента." noop %}</p>
     {% endif %}
 	
 	{% for book in object_list %}

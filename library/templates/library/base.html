@@ -1,49 +1,58 @@
+{% load i18n %}
+{% load cache %}
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+    <title>{% block title %}{{ settings.SITE_NAME }}{% endblock %}</title>
+    {% cache 5000 header %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block title %}{{ settings.SITE_NAME }}{% endblock %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% load static %}
     <link rel="shortcut icon" type="image/png" href="{% static 'library/favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'library/css/main.css.gz' %}">
+    {% endcache %}
 
     {% block head %}{% endblock %}
 </head>
 <body>
     <div class="layout">
         <header class="head">
+            {% cache 5000 header %}
             <h1 class="head__t">
                 <a href="{% url 'index' %}">{{ settings.SITE_NAME }}</a>
             </h1>
 
             <label class="head__toogle" for="toogle-menu">
-                <div>—</div>
-                <div>—</div>
-                <div>—</div>
+                <i>—</i>
+                <i>—</i>
+                <i>—</i>
             </label>
             <input class="head__toogle-input" type="checkbox" id="toogle-menu">
-
+            {% endcache %}
             <div class="head__menu">
                 {% include "library/snippets/menu.html" %}
 
-                {% include "library/snippets/search.html" %}
+                {% cache 5000 search %}
+                    {% include "library/snippets/search.html" %}
+                {% endcache %}
             </div>
         </header>
         <main class="content">
             {% block content_body %}{% endblock %}
 
-
             {% if is_paginated %}
                 {% include "library/snippets/pagination.html" %}
             {% endif %}
         </main>
+        {% cache 5000 footer %}
         <footer class="footer">
-            <p>Всі права на матеріали належать виключно їх авторам або законним правовласникам. Всі матеріали надаються виключно для ознайомлення. Адміністрація сайту не несе відповідальності за порушення авторських прав, однак готова співпрацювати з правовласниками. Якщо ви - автор матеріалу або законний правовласник - напишіть нам.</p>
+            <p>{% blocktrans %}Всі права на матеріали належать виключно їх авторам або законним правовласникам. Всі матеріали надаються виключно для ознайомлення. Адміністрація сайту не несе відповідальності за порушення авторських прав, однак готова співпрацювати з правовласниками. Якщо ви - автор матеріалу або законний правовласник - напишіть нам.{% endblocktrans %}</p>
         </footer>
+        {% endcache %}
     </div>
 
     {% block end_body %}{% endblock %}

@@ -1,4 +1,6 @@
+{% load i18n %}
+
 <form class="search" action="{% url 'search' %}" method="get">
-    <input type="text" name="search" id="search" placeholder="Пошук..." value="{{ search_value }}">
-    <button class="button __search">Шукати</button>
+    <input type="text" name="search" id="search" placeholder="{% trans 'Пошук...' noop %}" value="{{ search_value }}">
+    <button class="button __search">{% trans "Шукати" noop %}</button>
 </form>

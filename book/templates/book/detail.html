@@ -1,4 +1,7 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ book.name }} - {{ settings.SITE_NAME }}{% endblock %}
 
 {% block content_body %}
 	<h2 class="__t">{{ book.name }}</h2>
@@ -8,17 +11,17 @@
         <img src="{{ book.image|thumbnail_url:'book_cover' }}" alt="image">
     {% endif %}
 
-    <div class="__view">Переглядів: {{ book.hit_count.hits }}</div>
+    <div class="__view">{% trans "Переглядів" noop %}: {{ book.hit_count.hits }}</div>
 
     {% if book.author %}
     <div class="__author">
-        Автор: {{ book.author }}
+        {% trans "Автор" noop %}: {{ book.author }}
     </div>
     {% endif %}
 
     {% if book.category.all %}
     <div class="__cat">
-        Категорія: 
+        {% trans "Категорія" noop %}:
         {% for category in book.category.all %}
             <a href="{% url 'category:detail' category.slug %}">{{ category }}</a>{% if not loop.last %},{% endif %}
         {% endfor %}
@@ -27,7 +30,7 @@
 
     {% if book.specialty.all %}
     <div class="__cat">
-        Cпеціальність:
+        {% trans "Cпеціальність" noop %}:
         {% for specialty in book.specialty.all %}
             <a href="{% url 'specialty:detail' specialty.slug %}">{{ specialty }}</a>{% if not loop.last %},{% endif %}
         {% endfor %}
@@ -36,7 +39,11 @@
 
     {% if download_link %}
     <p>
-        <a class="button" href="{{ download_link }}" target="_blank">Завантажити у {{ download_file_type }}</a>
+        <a class="button" href="{{ download_link }}" target="_blank">
+            {% blocktrans with type=download_file_type %}
+                Завантажити у {{ type }}
+            {% endblocktrans %}
+        </a>
     </p>
     {% endif %}
 

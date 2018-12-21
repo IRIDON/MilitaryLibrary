@@ -34,7 +34,7 @@ class Detail(DetailView, MultipleObjectMixin):
 
     def get_context_data(self, **kwargs):
         category = kwargs['object']
-        self.object_list = filter_items(Book).filter(category__slug=category.slug)
+        self.object_list = filter_items(Book).filter(**{self.view_filter: category.slug})
 
         context = super(Detail, self).get_context_data(**kwargs)
 
@@ -50,6 +50,7 @@ class CategoryIndex(Index):
 
 class CategoryDetail(Detail):
     model = Category
+    view_filter = 'category__slug'
 
 
 class SpecialtyIndex(Index):
@@ -61,3 +62,4 @@ class SpecialtyIndex(Index):
 
 class SpecialtyDetail(Detail):
     model = Specialty
+    view_filter = 'specialty__slug'

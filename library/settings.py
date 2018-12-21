@@ -11,6 +11,9 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 APPS = [
     'library',
@@ -33,15 +36,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ] + APPS
 
+
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'htmlmin.middleware.HtmlMinifyMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware',
 ]
+
 
 ROOT_URLCONF = 'library.urls'
 
@@ -92,6 +102,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+CACHE_TIMEOUT = 60 * 15;
 
 
 STATIC_URL = '/static/'
@@ -162,6 +174,9 @@ MENU_ITEMS = [
 
 
 SEARCH_MIN_LENGHT = 3
+
+
+SLUG_MAX_LENGTH = 100
 
 
 ROW_ITEMS_AMOUNT = 3

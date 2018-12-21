@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.utils.translation import gettext as _
+from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 from tinymce.models import HTMLField
@@ -17,14 +18,7 @@ class Category(models.Model):
         verbose_name=_('Назва')
     )
     slug = models.SlugField(
-        max_length=25,
-        null=False,
-        blank=False,
-        unique=True,
-        verbose_name=_('Slug')
-    )
-    slug = models.SlugField(
-        max_length=140,
+        max_length=settings.SLUG_MAX_LENGTH,
         unique=True,
         null=True,
         blank=True,
@@ -64,7 +58,7 @@ class Specialty(models.Model):
         verbose_name=_('Назва')
     )
     slug = models.SlugField(
-        max_length=140,
+        max_length=settings.SLUG_MAX_LENGTH,
         unique=True,
         null=True,
         blank=True,

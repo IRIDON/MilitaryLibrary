@@ -1,9 +1,14 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Головна" noop %} - {{ settings.SITE_NAME }}
+{% endblock %}
 
 {% block content_body %}
-	<h2>Популярні:</h2>
+    <h2>{% trans "Популярні" noop %}:</h2>
     {% include "book/snippets/book_view.html" with book_list=most_views_books %}
 
-	<h2>Oстанні:</h2>
+    <h2>{% trans "Oстанні" noop %}:</h2>
     {% include "book/snippets/book_view.html" with book_list=new_books %}
 {% endblock %}

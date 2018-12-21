@@ -1,9 +1,12 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Книги" noop %} - {{ settings.SITE_NAME }}{% endblock %}
 
 {% block content_body %}
     {% include "book/snippets/book_view.html" with book_list=latest_book_list %}
 
     {% if latest_book_list|length == 0 %}
-        <p>Вибачте, в розділі немає жодного елемента.</p>
+        <p>{% trans "Вибачте, в розділі немає жодного елемента." noop %}</p>
     {% endif %}
 {% endblock %}

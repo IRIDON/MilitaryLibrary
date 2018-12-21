@@ -41,7 +41,7 @@ class Search(TemplateView):
     def get(self, request, **kwargs):
         data = request.GET.dict()
         keyword = data['search'].lower()
-        search_fields = ['name', 'description', 'author', 'category__name']
+        search_fields = ['name', 'description', 'author']
 
         context = {
             'keyword': keyword,
