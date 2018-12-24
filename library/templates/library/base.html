@@ -13,7 +13,7 @@
 
     {% load static %}
     <link rel="shortcut icon" type="image/png" href="{% static 'library/favicon.ico' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'library/css/main.css.gz' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'library/css/main.css' %}">
     {% endcache %}
 
     {% block head %}{% endblock %}
@@ -49,9 +49,7 @@
             {% endif %}
         </main>
         {% cache 5000 footer %}
-        <footer class="footer">
-            <p>{% blocktrans %}Всі права на матеріали належать виключно їх авторам або законним правовласникам. Всі матеріали надаються виключно для ознайомлення. Адміністрація сайту не несе відповідальності за порушення авторських прав, однак готова співпрацювати з правовласниками. Якщо ви - автор матеріалу або законний правовласник - напишіть нам.{% endblocktrans %}</p>
-        </footer>
+            {% include "library/snippets/footer.html" %}
         {% endcache %}
     </div>
 

@@ -2,6 +2,7 @@
 
 import os
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.utils.translation import ugettext_lazy as _
 from settings_local import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,15 +40,16 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
 ]
@@ -140,14 +142,14 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_buttons2': 'visualaid,tablecontrols,|,blockquote,del,ins,|,preview,code',
     'theme_advanced_toolbar_location': 'top',
     'theme_advanced_toolbar_align': 'left',
-    'content_css': staticfiles_storage.url('library/css/main.css.gz'),
+    'content_css': staticfiles_storage.url('library/css/main.css'),
     'extended_valid_elements': 'noindex',
     'custom_elements': 'noindex',
 }
 
 
 #Site main settings
-SITE_NAME = u'Військова бібліотека'
+SITE_NAME = _(u'Військова бібліотека')
 
 
 ALLOWED_BOOK_FORMATS = ('pdf', 'txt', 'doc', 'djvu', 'fb2', 'epub', 'mobi', 'rtf', 'lrf')
@@ -155,20 +157,28 @@ ALLOWED_BOOK_FORMATS = ('pdf', 'txt', 'doc', 'djvu', 'fb2', 'epub', 'mobi', 'rtf
 
 MENU_ITEMS = [
     {
-        'name': u"Головна",
+        'name': _(u"Головна"),
         'url': "index"
     },
     {
-        'name': u"Книги",
+        'name': _(u"Книги"),
         'url': "book:index"
     },
     {
-        'name': u"Категорії",
+        'name': _(u"Категорії"),
         'url': "category:index"
     },
     {
-        'name': u"Cпеціальності",
+        'name': _(u"Cпеціальності"),
         'url': "specialty:index"
+    }
+]
+
+
+FOOTER_MENU = [
+    {
+        'name': _(u"Зворотній зв'язок"),
+        'url': "contact-us"
     }
 ]
 
@@ -186,6 +196,7 @@ PAGE_LIST_AMOUNT_CAT = ROW_ITEMS_AMOUNT * 4
 SETTINGS_EXPORT = [
     'SITE_NAME',
     'MENU_ITEMS',
+    'FOOTER_MENU',
     'SEARCH_MIN_LENGHT',
     'ROW_ITEMS_AMOUNT',
     'PAGE_LIST_AMOUNT_BOOK',

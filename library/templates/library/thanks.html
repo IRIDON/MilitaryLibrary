@@ -1,0 +1,12 @@
+{% extends 'library/base.html' %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Дякуемо" noop %} - {{ settings.SITE_NAME }}
+{% endblock %}
+
+{% block content_body %}
+    <h1>{% trans "Дякуемо" noop %}</h1>
+    <p>{% trans "Ваше повідомлення будо надіслано." noop %}</p>
+{% endblock %}
+

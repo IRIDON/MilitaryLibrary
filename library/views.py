@@ -35,6 +35,10 @@ class Contact(FormView):
         return super(Contact, self).form_valid(form)
 
 
+class ContactThanks(TemplateView):
+    template_name = 'library/thanks.html'
+
+
 class Search(TemplateView):
     template_name = 'library/search.html'
 

@@ -25,8 +25,7 @@ gulp.task('style', function () {
             remove: false
         }))
         .pipe(csso())
-        .pipe(debug())
-        .pipe(gulpif(!DEV, gzip()))
+        // .pipe(gulpif(!DEV, gzip()))
         .pipe(gulp.dest(mainPath + '/css/'));
 });
  
