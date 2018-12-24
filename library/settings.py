@@ -107,6 +107,8 @@ USE_TZ = True
 
 CACHE_TIMEOUT = 60 * 15;
 
+HTML_MINIFY = not DEBUG
+
 
 STATIC_URL = '/static/'
 
