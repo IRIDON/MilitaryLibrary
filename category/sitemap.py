@@ -5,28 +5,26 @@ from library.logic import filter_items
 from .models import Category, Specialty
 
 
-class CategorySitemap(Sitemap):
+class Map(Sitemap):
     changefreq = "monthly"
-    priority = 0.7
+    priority = 0.5
 
+    def lastmod(self, obj):
+        return obj.pub_date
+
+
+class CategorySitemap(Map):
     def items(self):
         return filter_items(Category).all()
 
     def location(self, Model):
         return reverse('category:detail', kwargs={'slug': Model.slug})
 
-    def lastmod(self, obj):
-        return obj.pub_date
 
-class SpecialtySitemap(Sitemap):
-    changefreq = "monthly"
-    priority = 0.7
-
+class SpecialtySitemap(Map):
     def items(self):
         return filter_items(Specialty).all()
 
     def location(self, Model):
         return reverse('specialty:detail', kwargs={'slug': Model.slug})
 
-    def lastmod(self, obj):
-        return obj.pub_date

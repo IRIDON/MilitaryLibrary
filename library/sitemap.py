@@ -3,12 +3,22 @@ from django.urls import reverse
 
 from library.logic import filter_items
 
-class StaticViewSitemap(Sitemap):
-    priority = 1
+class Map(Sitemap):
     changefreq = 'daily'
-
-    def items(self):
-        return ['index', 'category:index', 'specialty:index', 'contact-us']
 
     def location(self, item):
         return reverse(item)
+
+
+class MainPageSitemap(Map):
+    priority = 1
+
+    def items(self):
+        return ['index']
+
+
+class StaticSitemap(Map):
+    priority = 0.7
+
+    def items(self):
+        return ['category:index', 'specialty:index', 'contact-us']

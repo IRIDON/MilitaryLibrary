@@ -10,10 +10,11 @@ from category import urls
 
 from book.sitemap import BookSitemap
 from category.sitemap import CategorySitemap, SpecialtySitemap
-from .sitemap import StaticViewSitemap
+from .sitemap import MainPageSitemap, StaticSitemap
 
 sitemaps = {
-    'static': StaticViewSitemap,
+    'index': MainPageSitemap,
+    'static': StaticSitemap,
     'books': BookSitemap,
     'categories': CategorySitemap,
     'specialties': SpecialtySitemap,
