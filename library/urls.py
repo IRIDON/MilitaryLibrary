@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import GenericSitemap
+from django.views.decorators.cache import cache_page
 
 from . import views
 from category import urls

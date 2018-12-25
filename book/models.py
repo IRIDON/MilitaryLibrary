@@ -5,6 +5,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.sitemaps import ping_google
 from category.models import Category, Specialty
 
 from filer.fields.image import FilerImageField
@@ -112,6 +113,12 @@ class Book(models.Model, HitCountMixin):
             self.slug = _get_unique_slug(self.name, Book)
 
         super(Book, self).save(*args, **kwargs)
+
+        #request to google update sitemap
+        try:
+            ping_google()
+        except Exception:
+            pass
 
     class Meta:
         verbose_name = _('Книгу')
