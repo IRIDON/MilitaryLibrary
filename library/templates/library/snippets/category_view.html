@@ -1,0 +1,4 @@
+{% for category in objects %}
+<a href="{% url part category.slug %}">
+    {{ category }}</a>{% if not forloop.last %},{% endif %}
+{% endfor %}

@@ -13,7 +13,7 @@
 
     {% load static %}
     <link rel="shortcut icon" type="image/png" href="{% static 'library/favicon.ico' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'library/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static settings.MAIN_STYLE_PART %}">
     {% endcache %}
 
     {% block head %}{% endblock %}

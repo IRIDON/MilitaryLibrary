@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
 
 MIDDLEWARE = [
+    # Strict orderliness
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 
+    #Free orderliness
     'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -112,6 +114,8 @@ HTML_MINIFY = not DEBUG
 
 STATIC_URL = '/static/'
 
+MAIN_STYLE_PART = 'library/css/main.css'
+
 
 #Thumbnail
 THUMBNAIL_PROCESSORS = (
@@ -144,7 +148,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_buttons2': 'visualaid,tablecontrols,|,blockquote,del,ins,|,preview,code',
     'theme_advanced_toolbar_location': 'top',
     'theme_advanced_toolbar_align': 'left',
-    'content_css': staticfiles_storage.url('library/css/main.css'),
+    'content_css': staticfiles_storage.url(MAIN_STYLE_PART),
     'extended_valid_elements': 'noindex',
     'custom_elements': 'noindex',
 }
@@ -159,10 +163,6 @@ ALLOWED_BOOK_FORMATS = ('pdf', 'txt', 'doc', 'djvu', 'fb2', 'epub', 'mobi', 'rtf
 
 MENU_ITEMS = [
     {
-        'name': _(u"Головна"),
-        'url': "index"
-    },
-    {
         'name': _(u"Книги"),
         'url': "book:index"
     },
@@ -176,8 +176,15 @@ MENU_ITEMS = [
     }
 ]
 
+MAIN_MENU = [
+    {
+        'name': _(u"Головна"),
+        'url': "index"
+    },
+] + MENU_ITEMS
 
-FOOTER_MENU = [
+
+FOOTER_MENU = MENU_ITEMS + [
     {
         'name': _(u"Зворотній зв'язок"),
         'url': "contact-us"
@@ -195,9 +202,11 @@ ROW_ITEMS_AMOUNT = 3
 PAGE_LIST_AMOUNT_BOOK = ROW_ITEMS_AMOUNT * 3
 PAGE_LIST_AMOUNT_CAT = ROW_ITEMS_AMOUNT * 4
 
+
 SETTINGS_EXPORT = [
     'SITE_NAME',
-    'MENU_ITEMS',
+    'MAIN_STYLE_PART',
+    'MAIN_MENU',
     'FOOTER_MENU',
     'SEARCH_MIN_LENGHT',
     'ROW_ITEMS_AMOUNT',

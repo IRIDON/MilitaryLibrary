@@ -22,27 +22,23 @@
     {% if book.category.all %}
     <div class="__cat">
         {% trans "Категорія" noop %}:
-        {% for category in book.category.all %}
-            <a href="{% url 'category:detail' category.slug %}">{{ category }}</a>{% if not loop.last %},{% endif %}
-        {% endfor %}
+
+        {% include "library/snippets/category_view.html" with objects=book.category.all part='category:detail' %}
     </div>
     {% endif %}
 
     {% if book.specialty.all %}
     <div class="__cat">
         {% trans "Cпеціальність" noop %}:
-        {% for specialty in book.specialty.all %}
-            <a href="{% url 'specialty:detail' specialty.slug %}">{{ specialty }}</a>{% if not loop.last %},{% endif %}
-        {% endfor %}
+
+        {% include "library/snippets/category_view.html" with objects=book.specialty.all part='specialty:detail' %}
     </div>
     {% endif %}
 
     {% if download_link %}
     <p>
         <a class="button" href="{{ download_link }}" target="_blank">
-            {% blocktrans with type=download_file_type %}
-                Завантажити у {{ type }}
-            {% endblocktrans %}
+            {% blocktrans with type=download_file_type %}Завантажити у {{ type }}{% endblocktrans %}
         </a>
     </p>
     {% endif %}
