@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from .models import Category, Specialty
 
 class ModelAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'page', 'pub_date']
+    list_display = ['visible', 'name', 'slug', 'page', 'pub_date']
 
     def page(self, object):
         url = reverse(self.url_part, kwargs={'slug': object.slug})

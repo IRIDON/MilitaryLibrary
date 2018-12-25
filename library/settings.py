@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps'
 ] + APPS
 
 
@@ -114,7 +115,8 @@ HTML_MINIFY = not DEBUG
 
 STATIC_URL = '/static/'
 
-MAIN_STYLE_PART = 'library/css/main.css'
+STATIC_STYLE_PATH = os.path.join('library', 'css')
+MAIN_STYLE_PATH = STATIC_STYLE_PATH + '/main.css'
 
 
 #Thumbnail
@@ -148,7 +150,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_buttons2': 'visualaid,tablecontrols,|,blockquote,del,ins,|,preview,code',
     'theme_advanced_toolbar_location': 'top',
     'theme_advanced_toolbar_align': 'left',
-    'content_css': staticfiles_storage.url(MAIN_STYLE_PART),
+    'content_css': staticfiles_storage.url(MAIN_STYLE_PATH),
     'extended_valid_elements': 'noindex',
     'custom_elements': 'noindex',
 }
@@ -205,7 +207,7 @@ PAGE_LIST_AMOUNT_CAT = ROW_ITEMS_AMOUNT * 4
 
 SETTINGS_EXPORT = [
     'SITE_NAME',
-    'MAIN_STYLE_PART',
+    'MAIN_STYLE_PATH',
     'MAIN_MENU',
     'FOOTER_MENU',
     'SEARCH_MIN_LENGHT',

@@ -11,6 +11,10 @@ from library.logic import _get_unique_slug
 
 # Create your models here.
 class Category(models.Model):
+    visible = models.BooleanField(
+        default=True,
+        verbose_name=_('Показувати')
+    )
     name = models.CharField(
         blank=False, 
         null=True, 
@@ -51,6 +55,10 @@ class Category(models.Model):
 
 
 class Specialty(models.Model):
+    visible = models.BooleanField(
+        default=True,
+        verbose_name=_('Показувати')
+    )
     name = models.CharField(
         blank=False,
         null=True,
