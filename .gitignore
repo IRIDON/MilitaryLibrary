@@ -40,8 +40,9 @@ local_settings.py
 db.sqlite3
 
 
+cache/
 media/
-static/
+/static/
 /node_modules/
 settings_local.py
 .DS_Store

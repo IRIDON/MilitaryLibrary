@@ -16,13 +16,12 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-APPS = [
+
+INSTALLED_APPS = [
     'library',
     'book',
     'category',
-]
 
-INSTALLED_APPS = [
     'tinymce',
     'hitcount',
     'easy_thumbnails',
@@ -36,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps'
-] + APPS
+]
 
 
 MIDDLEWARE = [
@@ -103,20 +102,15 @@ LANGUAGE_CODE = 'uk'
 TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
-CACHE_TIMEOUT = 60 * 15;
 
 HTML_MINIFY = not DEBUG
 
 
 STATIC_URL = '/static/'
 
-STATIC_STYLE_PATH = os.path.join('library', 'css')
-MAIN_STYLE_PATH = STATIC_STYLE_PATH + '/main.css'
+MAIN_STYLE_PATH = os.path.join('library', 'css', 'main.css')
 
 
 #Thumbnail

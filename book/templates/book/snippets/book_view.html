@@ -39,7 +39,7 @@
         <p class="list__tx">{{ book.description|striptags|truncatechars:200|safe }}</p>
     </div>
 
-    {% if forloop.counter|divisibleby:3 %}
+    {% if forloop.counter|divisibleby:settings.ROW_ITEMS_AMOUNT %}
     <div class="clr"></div>
     {% endif %}
 {% endfor %}

@@ -1,0 +1,18 @@
+.footer {
+	background-color: $color-dark;
+	color: lighten($color-dark, 50%);
+	padding: 0 $content-indent;
+
+	&__menu {
+		margin: 1em 0;
+        font-size: 0.8em;
+		line-height: $line-height;
+
+		a {
+			white-space: nowrap;
+		}
+	}
+    &__tx {
+        font-size: 0.8em;
+    }
+}

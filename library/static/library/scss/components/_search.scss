@@ -1,0 +1,13 @@
+.search {
+	display: flex;
+    margin: 14px 0;
+	
+    @media #{$media-sm} {
+        justify-content: center;
+    }
+
+    .button {
+    	height: auto;
+        line-height: 1;
+    }
+}

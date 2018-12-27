@@ -5,8 +5,8 @@
         <a class="pagination__link" href="?page={{ page_obj.previous_page_number }}">{% trans "попередня" noop %}</a>
     {% endif %}
 
-    <span class="pagination__current">
-        {% trans "Сторінки" noop %} {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}
+    <span class="pagination__tx">
+    {% trans "Сторінка" noop %} {{ page_obj.number }} {% trans "з" noop %} {{ page_obj.paginator.num_pages }}
     </span>
 
     {% if page_obj.has_next %}
