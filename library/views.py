@@ -52,7 +52,9 @@ class Search(TemplateView):
         }
 
         if len(keyword) >= settings.SEARCH_MIN_LENGHT:
-            search = filter_items(Book).filter(search_filter(search_fields, keyword))
+            search = filter_items(Book).filter(
+                search_filter(search_fields, keyword)
+            )
 
             context.update({
                 'search_list': search,

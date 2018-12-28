@@ -37,12 +37,12 @@ pip-delete-this-directory.txt
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
 
 
 cache/
 media/
 /static/
 /node_modules/
-settings_local.py
+/settings_local.py
+/settings_exemple.py
 .DS_Store
